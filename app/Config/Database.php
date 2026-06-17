@@ -200,5 +200,31 @@ class Database extends Config
         if (ENVIRONMENT === 'testing') {
             $this->defaultGroup = 'tests';
         }
+
+        // Map Vercel environment variables (underscores) to PostgreSQL configuration
+        if ($hostname = getenv('database_default_hostname') ?: getenv('database.default.hostname')) {
+            $this->default['hostname'] = $hostname;
+        }
+        if ($database = getenv('database_default_database') ?: getenv('database.default.database')) {
+            $this->default['database'] = $database;
+        }
+        if ($username = getenv('database_default_username') ?: getenv('database.default.username')) {
+            $this->default['username'] = $username;
+        }
+        if ($password = getenv('database_default_password') ?: getenv('database.default.password')) {
+            $this->default['password'] = $password;
+        }
+        if ($driver = getenv('database_default_DBDriver') ?: getenv('database.default.DBDriver')) {
+            $this->default['DBDriver'] = $driver;
+        }
+        if ($port = getenv('database_default_port') ?: getenv('database.default.port')) {
+            $this->default['port'] = (int)$port;
+        }
+        if ($charset = getenv('database_default_charset') ?: getenv('database.default.charset')) {
+            $this->default['charset'] = $charset;
+        }
+        if ($dbCollat = getenv('database_default_DBCollat') ?: getenv('database.default.DBCollat')) {
+            $this->default['DBCollat'] = $dbCollat;
+        }
     }
 }

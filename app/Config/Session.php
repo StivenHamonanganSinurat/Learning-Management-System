@@ -126,4 +126,16 @@ class Session extends BaseConfig
      * seconds.
      */
     public int $lockMaxRetries = 300;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        if ($driver = getenv('session_driver') ?: getenv('session.driver')) {
+            $this->driver = $driver;
+        }
+        if ($savePath = getenv('session_savePath') ?: getenv('session.savePath')) {
+            $this->savePath = $savePath;
+        }
+    }
 }
