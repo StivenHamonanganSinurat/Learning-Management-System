@@ -46,6 +46,7 @@ class Paths
      * ---------------------------------------------------------------
      * WRITABLE DIRECTORY NAME
      * ---------------------------------------------------------------
+     */
     public string $writableDirectory = __DIR__ . '/../../writable';
 
     public function __construct()
