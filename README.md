@@ -64,19 +64,15 @@ Ikuti langkah-langkah di bawah ini untuk menjalankan aplikasi di komputer lokal:
    database.default.port = 3306
    ```
 
-### Langkah 3: Setup Dependencies & Database (Terminal)
-Buka Command Prompt atau PowerShell di folder proyek (`C:\xampp\htdocs\lms_stikes`), lalu jalankan perintah berikut:
-
-```bash
-# 1. Install Library dependensi via Composer
-composer install
-
-# 2. Jalankan Migrasi Database (Membuat semua tabel secara otomatis)
-php spark migrate
-
-# 3. Masukkan Data Sampel / Data Pengujian
-php spark db:seed TestDataSeeder
-```
+### Langkah 3: Import Database & Install Dependensi
+1. Buka **phpMyAdmin** di browser Anda, klik database **`lms_stikes`** yang telah dibuat.
+2. Pilih tab **Import** di bagian atas menu phpMyAdmin.
+3. Klik **Choose File** / **Pilih Berkas**, lalu pilih berkas **`lms_stikes.sql`** yang terletak di root direktori proyek ini.
+4. Gulir ke bawah dan klik tombol **Import** / **Kirim**. Seluruh struktur tabel dan data sampel pengujian akan terisi secara otomatis.
+5. Buka Command Prompt atau PowerShell di folder proyek (`C:\xampp\htdocs\lms_stikes`), lalu jalankan perintah berikut untuk menginstal pustaka yang dibutuhkan:
+   ```bash
+   composer install
+   ```
 
 ### Langkah 4: Menjalankan Aplikasi
 Akses aplikasi melalui browser Anda dengan URL:
