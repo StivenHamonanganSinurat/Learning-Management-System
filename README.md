@@ -1,95 +1,115 @@
 # LMS Stikes Nauli Husada
 
-Learning Management System untuk Stikes Nauli Husada — dibangun dengan CodeIgniter 4.
+Learning Management System untuk Stikes Nauli Husada — dibangun dengan PHP 8.2+ dan framework CodeIgniter 4.
 
-## 🚀 Fitur
+---
 
-### Admin
-- Dashboard statistik lengkap
-- CRUD User (Dosen & Mahasiswa)
-- CRUD Program Studi & Mata Kuliah
-- Manajemen Kelas & Enrollment
-- Manajemen Jadwal & Ruangan Kelas (anti-konflik)
+## 🚀 Fitur Sistem (Berdasarkan Role)
 
-### Dosen
-- Manajemen Materi (upload file)
-- Manajemen Tugas (buat & nilai)
-- Manajemen Kuis (soal pilihan ganda, timer)
-- Absensi Online
-- Input & Rekap Nilai
-- Forum Diskusi & Pengumuman
-- Kelola Jadwal Perkuliahan
+### 1. Admin (Pengelola)
+* **Dashboard**: Statistik ringkas jumlah mahasiswa, dosen, kelas, prodi, dan mata kuliah.
+* **Manajemen User**: CRUD lengkap untuk Dosen dan Mahasiswa.
+* **Manajemen Akademik**: CRUD Program Studi, Mata Kuliah, Kelas, dan Enrollment Mahasiswa ke kelas.
+* **Manajemen Jadwal & Ruangan**: Penjadwalan kelas pintar dengan deteksi tabrakan waktu/ruangan secara otomatis.
 
-### Mahasiswa
-- Dashboard progress & notifikasi
-- Lihat & Download Materi
-- Submit Tugas
-- Ikut Kuis (timer + auto-submit)
-- Lihat Nilai & Transkrip
-- Forum Diskusi
-- Jadwal Kuliah & Reminder
-- Gamifikasi (Poin, Badge, Leaderboard)
-- Generate Sertifikat PDF
+### 2. Dosen (Pengajar)
+* **Dashboard**: Menampilkan statistik kelas yang diajar.
+* **Materi**: Unggah materi pembelajaran berupa file (PDF, Dokumen), video, atau artikel/teks.
+* **Tugas**: Pembuatan tugas, batas waktu pengerjaan, dan penilaian tugas mahasiswa.
+* **Kuis**: Pembuatan bank soal pilihan ganda, durasi kuis, nilai otomatis, dan batasan pengerjaan (*quiz attempt*).
+* **Absensi**: Input absensi kehadiran kelas per mahasiswa.
+* **Rekap Nilai**: Input & kalkulasi otomatis nilai UTS, UAS, tugas, dan kuis.
+* **Komunikasi**: Forum diskusi kelas & pengumuman resmi.
 
-## 🛠️ Tech Stack
+### 3. Mahasiswa (Belajar)
+* **Dashboard**: Progress bar belajar, badge gamifikasi, poin, dan reminder kelas terdekat.
+* **Materi & Tugas**: Unduh materi dan kumpulkan tugas sebelum batas waktu.
+* **Kuis**: Mengerjakan kuis dengan *countdown timer* real-time.
+* **Absensi & Nilai**: Melihat histori kehadiran dan transkrip nilai/UTS/UAS.
+* **Gamifikasi**: Fitur Leaderboard kelas, pengumpulan Poin, dan klaim Badge prestasi.
+* **Sertifikat**: Unduh Sertifikat Kelulusan otomatis (PDF) untuk mata kuliah dengan Grade A/B/C.
 
-- **Backend**: PHP 8.2+, CodeIgniter 4.7
-- **Database**: PostgreSQL (Supabase) / MySQL
-- **Frontend**: AdminLTE 3, Bootstrap 4
-- **PDF**: DOMPDF
-- **Hosting**: Vercel (via vercel-php runtime)
+---
 
-## 📋 Setup Lokal
+## 🛠️ Tech Stack & Prasyarat Sistem
+
+* **Bahasa & Framework**: PHP 8.2+ & CodeIgniter 4.7
+* **Database**: MySQL / MariaDB (XAMPP phpMyAdmin)
+* **UI/UX**: AdminLTE 3 & Bootstrap 4
+* **Generator PDF**: DOMPDF Library
+
+---
+
+## 💻 Panduan Instalasi Lokal (XAMPP MySQL)
+
+Ikuti langkah-langkah di bawah ini untuk menjalankan aplikasi di komputer lokal:
+
+### Langkah 1: Persiapan Database
+1. Aktifkan **Apache** dan **MySQL** di XAMPP Control Panel Anda.
+2. Buka browser dan akses **`http://localhost/phpmyadmin/`**.
+3. Buat database baru bernama **`lms_stikes`**.
+
+### Langkah 2: Konfigurasi Kode Sumber
+1. Salin folder proyek `lms_stikes` ke dalam direktori **`C:\xampp\htdocs\`** Anda.
+2. Buka berkas [`.env`](file:///C:/xampp/htdocs/lms_stikes/.env) di root proyek dan sesuaikan konfigurasi database Anda seperti di bawah ini:
+   ```env
+   CI_ENVIRONMENT = development
+   app.baseURL = 'http://localhost/lms_stikes/public/'
+
+   database.default.hostname = localhost
+   database.default.database = lms_stikes
+   database.default.username = root
+   database.default.password = 
+   database.default.DBDriver = MySQLi
+   database.default.port = 3306
+   ```
+
+### Langkah 3: Setup Dependencies & Database (Terminal)
+Buka Command Prompt atau PowerShell di folder proyek (`C:\xampp\htdocs\lms_stikes`), lalu jalankan perintah berikut:
 
 ```bash
-# Clone repository
-git clone https://github.com/StivenHamonanganSinurat/Learning-Management-System.git
-cd Learning-Management-System
-
-# Install dependencies
+# 1. Install Library dependensi via Composer
 composer install
 
-# Copy environment file
-cp env .env
-
-# Edit .env (database credentials)
-# Jalankan migration
+# 2. Jalankan Migrasi Database (Membuat semua tabel secara otomatis)
 php spark migrate
 
-# Jalankan seeder (data testing)
+# 3. Masukkan Data Sampel / Data Pengujian
 php spark db:seed TestDataSeeder
-
-# Jalankan server
-php spark serve
 ```
 
-## 🔑 Akun Testing
+### Langkah 4: Menjalankan Aplikasi
+Akses aplikasi melalui browser Anda dengan URL:
+👉 **`http://localhost/lms_stikes/public/`**
 
-| Role | Email | Password |
-|------|-------|----------|
-| Admin | admin@lms.test | password123 |
-| Dosen | dosen@lms.test | password123 |
-| Mahasiswa | mahasiswa@lms.test | password123 |
+---
 
-## 📁 Struktur Project
+## 🔑 Akun & Detail Login Pengujian
+
+Gunakan akun di bawah ini untuk menguji masing-masing role:
+
+| No | Role | Alamat Email | Password | Hak Akses Utama |
+|---|---|---|---|---|
+| 1 | **Admin** | `admin@lms.test` | `password123` | Mengelola User, Prodi, Kelas, & Ruangan |
+| 2 | **Dosen** | `dosen@lms.test` | `password123` | Mengajar, Menilai, Mengabsen, Mengelola Kuis |
+| 3 | **Mahasiswa** | `mahasiswa@lms.test` | `password123` | Belajar, Absen, Tugas, Kuis, Gamifikasi, Unduh Sertifikat |
+
+---
+
+## 📁 Struktur Direktori Utama
 
 ```
 lms_stikes/
-├── api/                  # Vercel PHP entry point
 ├── app/
-│   ├── Config/           # Konfigurasi (Routes, Database, Session)
-│   ├── Controllers/      # Admin, Dosen, Mahasiswa controllers
+│   ├── Config/           # Konfigurasi aplikasi (Routes, Database, Session)
+│   ├── Controllers/      # Controller Logika Bisnis (Admin, Dosen, Mahasiswa)
 │   ├── Database/
-│   │   ├── Migrations/   # Schema database
-│   │   └── Seeds/        # Data testing
-│   ├── Helpers/          # GamifikasiHelper
-│   ├── Models/           # Eloquent-style models
-│   └── Views/            # AdminLTE templates
-├── public/               # Assets & entry point
-├── vercel.json           # Vercel deployment config
-└── .env.example          # Template konfigurasi
+│   │   ├── Migrations/   # Skema Tabel MySQL
+│   │   └── Seeds/        # Data Sampel Pengujian (TestDataSeeder)
+│   ├── Helpers/          # GamifikasiHelper (Sistem Poin & Badge)
+│   ├── Models/           # Model data (User, Kelas, Tugas, Nilai, dll)
+│   └── Views/            # Tampilan Antarmuka (AdminLTE / Blade-like PHP)
+├── public/               # File aset publik (CSS, JS, Gambar, Vendor)
+├── writable/             # Cache, Session lokal, dan Upload Berkas (Materi/Tugas)
+└── .env                  # Berkas konfigurasi rahasia lokal
 ```
-
-## 📄 Lisensi
-
-MIT License
