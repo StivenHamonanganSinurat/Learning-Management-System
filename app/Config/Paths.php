@@ -49,15 +49,6 @@ class Paths
      */
     public string $writableDirectory = __DIR__ . '/../../writable';
 
-    public function __construct()
-    {
-        if (isset($_ENV['WRITEPATH'])) {
-            $this->writableDirectory = $_ENV['WRITEPATH'];
-        } elseif (getenv('WRITEPATH')) {
-            $this->writableDirectory = getenv('WRITEPATH');
-        }
-    }
-
     /**
      * ---------------------------------------------------------------
      * TESTS DIRECTORY NAME
